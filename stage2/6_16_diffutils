@@ -1,0 +1,25 @@
+
+
+#bugfix
+patch -p1 < ../0001-explicitly-disable-replacing-getopt.patch
+autoreconf -f -i
+sed -i '/rpl_$/d' lib/config.h
+
+./configure --prefix=/tools32 \
+    --build=${CLFS_HOST} --host=${CLFS_TARGET}
+
+make
+
+#if error in lib/getopt-cdefs.h 
+#in lib/getopt-cdefs.h remove #if statement in 32,34 line
+
+make install
+
+========
+xstrtol-error.c: In function 'xstrtol_error':
+xstrtol-error.c:84:26: error: invalid use of undefined type 'struct rpl_option'
+     option = long_options[opt_idx].name;
+                          ^
+======
+
+

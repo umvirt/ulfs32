@@ -1,0 +1,42 @@
+patch -p1 < ../gcc-8.2.0-specs-1.patch
+
+tar -xf ../mpfr-4.0.1.tar.xz
+mv -v mpfr-4.0.1 mpfr
+tar -xf ../gmp-6.1.2.tar.xz
+mv -v gmp-6.1.2 gmp
+tar -xf ../mpc-1.1.0.tar.gz
+mv -v mpc-1.1.0 mpc
+
+for file in gcc/config/{linux,i386/linux{,64}}.h
+do
+  cp -uv $file{,.orig}
+  sed -e 's@/lib\(64\)\?\(32\)\?/ld@/tools32&@g' \
+      -e 's@/usr@/tools32@g' $file.orig > $file
+  echo '
+#undef STANDARD_STARTFILE_PREFIX_1
+#undef STANDARD_STARTFILE_PREFIX_2
+#define STANDARD_STARTFILE_PREFIX_1 "/tools32/lib/"
+#define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
+  touch $file.orig
+done
+
+mkdir -v build2
+cd build2
+
+
+AR=ar LDFLAGS="-Wl,-rpath,/cross-tools32/lib" \
+    ../configure --prefix=/cross-tools32 \
+    --build=${CLFS_HOST} --target=${CLFS_TARGET} --host=${CLFS_HOST} \
+    --with-sysroot=${CLFS} --with-local-prefix=/tools32 \
+    --with-native-system-header-dir=/tools32/include --disable-nls \
+    --disable-static --enable-languages=c,c++ --enable-__cxa_atexit \
+    --enable-threads=posix --disable-multilib \
+    --with-mpc=/cross-tools32 --with-mpfr=/cross-tools32 --with-gmp=/cross-tools32 \
+    --with-cloog=/cross-tools32 --with-isl=/cross-tools32 --with-system-zlib \
+    --enable-checking=release --enable-libstdcxx-time
+
+make AS_FOR_TARGET="${CLFS_TARGET}-as" \
+    LD_FOR_TARGET="${CLFS_TARGET}-ld"
+
+make install
+

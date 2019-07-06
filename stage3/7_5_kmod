@@ -1,0 +1,11 @@
+./configure --prefix=/tools32 \
+    --build=${CLFS_HOST} --host=${CLFS_TARGET} --with-xz --with-zlib
+
+make
+make install
+
+
+ln -sfv kmod /tools32/bin/lsmod
+for tool in depmod insmod modprobe modinfo rmmod; do
+    ln -sv ../bin/kmod /tools32/sbin/${tool}
+done

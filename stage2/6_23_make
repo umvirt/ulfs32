@@ -1,0 +1,7 @@
+patch -p1 < ../make-4.2.1.patch
+
+./configure --prefix=/tools32 \
+    --build=${CLFS_HOST} --host=${CLFS_TARGET}
+
+make
+make install 

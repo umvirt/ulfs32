@@ -1,0 +1,4 @@
+./configure --prefix=/cross-tools32 --host=${CLFS_TARGET}\
+    --with-pc-path=/tools32/lib/pkgconfig:/tools32/share/pkgconfig
+make
+make install

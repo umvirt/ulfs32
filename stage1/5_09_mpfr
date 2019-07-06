@@ -1,0 +1,7 @@
+#4.0.1
+LDFLAGS="-Wl,-rpath,/cross-tools32/lib" \
+./configure --prefix=/cross-tools32 \
+    --disable-static --with-gmp=/cross-tools32
+
+make
+make install

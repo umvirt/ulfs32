@@ -1,0 +1,2 @@
+mknod -m 0600 ${CLFS}/dev/console c 5 1
+mknod -m 0666 ${CLFS}/dev/null c 1 3

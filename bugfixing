@@ -1,0 +1,28 @@
+Error in GCC,G++
+=================
+
+Toolchain compiler
+
+export CC=/tools32/bin/gcc
+export CXX=/tools32/bin/g++
+
+System compiler
+
+export CC=gcc
+export CXX=g++
+
+
+PROCDEV in inetutils
+====================
+
+no virtfs (lfs 6.2 chapter)
+
+mount -v --bind /dev $LFS/dev
+mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
+mount -vt proc proc $LFS/proc
+mount -vt sysfs sysfs $LFS/sys
+mount -vt tmpfs tmpfs $LFS/run
+
+if [ -h $LFS/dev/shm ]; then
+  mkdir -pv $LFS/$(readlink $LFS/dev/shm)
+fi

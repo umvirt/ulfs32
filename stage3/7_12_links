@@ -1,0 +1,14 @@
+export CLFS=/mnt/ulfs32
+echo $CLFS
+
+ln -sv /tools32/bin/{bash,cat,echo,grep,login,pwd,stty} ${CLFS}/bin
+ln -sv /tools32/bin/file ${CLFS}/usr/bin
+ln -sv /tools32/lib/libgcc_s.so{,.1} ${CLFS}/usr/lib
+ln -sv /tools32/lib/libstdc++.so{.6,} ${CLFS}/usr/lib
+sed -e 's/tools32/usr/' /tools32/lib/libstdc++.la > ${CLFS}/usr/lib/libstdc++.la
+ln -sv bash ${CLFS}/bin/sh
+ln -sv /tools32/sbin/init ${CLFS}/sbin
+ln -sv /tools32/etc/{login.{access,defs},limits} ${CLFS}/etc
+
+
+ln -sv /proc/self/mounts ${CLFS}/etc/mtab

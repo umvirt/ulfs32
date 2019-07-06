@@ -1,0 +1,6 @@
+CC_FOR_BUILD=gcc ./configure --prefix=/tools32 \
+    --build=${CLFS_HOST} --host=${CLFS_TARGET} \
+    --enable-cxx
+
+make
+make install

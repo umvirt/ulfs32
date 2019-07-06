@@ -1,0 +1,4 @@
+./configure --prefix=/tools32
+
+make
+make install

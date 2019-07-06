@@ -1,0 +1,99 @@
+UmVirt LFS x86 (32bit)
+======================
+
+Pros: 
+- Lower memory consumption against x86 (64bit)
+- Old pc 32 apps support
+- Windows 32 apps support (wine)
+
+Cons:
+- no 64 bit apps
+- 4GB ram max 
+
+Compilation
+-----------
+
+Crosscompiled in forge (primary, pure x86_64 bit, without multilib).
+
+There are compilation problems which not appear during forge compilation
+because forge has newer version of packages than compilation environment where it was compiled.
+
+One of this problems is lack of glibc support in: 
+* m4
+* diffutils
+* gzip
+* findutils
+* make
+
+Not all fixes in patches. Diffutils need manual bugfixing 
+
+Binutils opcodes bug when building grub
+
+Libffi updated to i686.
+
+
+Parameters:
+
+Target: i686-ulfs-linux-gnu
+CrossCompiler Dir: /cross-tools32 (/cross-tools in CLFS)
+Compiler Dir: /tools32 (/tools in CLFS)
+
+Note: Another directory names used in order to allow multiple cross-compilations
+
+
+Stages
+======
+
+1. Stage #1. "Cross-compilation environment" (/cross-tools32)
+
+Base: 5-th Chapter of CLFS book. Packages updated according LFS 8.3. 
+Input method: Copy & paste.
+
+2. Stage #2. "Cross-compilation of compilation environment" (/tools32) 
+
+Base: 6-th Chapter of CLFS book. Packages updated according LFS 8.3. 
+Input method: Copy & paste.
+
+4. Stage #3. "Boot preparation"
+
+Base: 7-th Chapter of CLFS book. Packages updated according LFS 8.3. 
+Input method: Copy & paste.
+
+5. Stage #4. "Boot"
+
+Base: 6-th Chapter of LFS book. 32-bit optimisation.
+Input method: 
+- direct cmd file execution
+- cmd file transfer via keyboard & execution
+
+6. Stage #5. "Final"
+Input method: 
+- direct cmd file execution
+- cmd file transfer via keyboard & execution
+
+
+Used tricks
+===========
+
+- File transfer via keyboard
+- Tab autocompletion
+- Pipe to bash
+
+
+Links
+-----
+
+CLFS SYSTEMD (outdated)
+http://clfs.org/view/CLFS-3.0.0-SYSTEMD/x86/
+
+CLFS SYSTEMD (outdated) packages
+http://clfs.org/view/CLFS-3.0.0-SYSTEMD/x86/materials/packages.html
+
+CLFS SYSTEMD (outdated) patches
+http://clfs.org/view/CLFS-3.0.0-SYSTEMD/x86/materials/patches.html
+
+GCC dependances
+ftp://gcc.gnu.org/pub/gcc/infrastructure/
+
+GCC targets
+https://gcc.gnu.org/install/specific.html

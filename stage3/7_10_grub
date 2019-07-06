@@ -1,0 +1,7 @@
+./configure --prefix=/tools32 \
+    --build=${CLFS_HOST} --host=${CLFS_TARGET} \
+    --disable-werror --enable-grub-mkfont=no --with-bootdir=tools32/boot
+
+make
+make install
+

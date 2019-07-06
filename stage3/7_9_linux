@@ -1,0 +1,29 @@
+make mrproper
+make defconfig
+
+make ARCH=i386 CROSS_COMPILE=${CLFS_TARGET}- menuconfig
+
+
+Device Drivers  --->
+  Generic Driver Options  --->
+    ()  path to uevent helper (CONFIG_UEVENT_HELPER_PATH)
+    [*] Maintain a devtmpfs filesystem to mount at /dev (CONFIG_DEVTMPFS)
+    [ ] Fallback user-helper invocation for firmware loading (CONFIG_FW_LOADER_USER_HELPER)
+
+
+make ARCH=i386 CROSS_COMPILE=${CLFS_TARGET}-
+
+make ARCH=i386 CROSS_COMPILE=${CLFS_TARGET}- \
+    INSTALL_MOD_PATH=/tools32 modules_install
+
+make ARCH=i386 CROSS_COMPILE=${CLFS_TARGET}- \
+    INSTALL_MOD_PATH=/tools32 firmware_install
+
+mkdir -pv /tools32/boot
+cp -v arch/i386/boot/bzImage /tools32/boot/vmlinuz
+
+cp -v System.map /tools32/boot/System.map
+
+cp -v .config /tools32/boot/config
+
+

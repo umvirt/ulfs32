@@ -1,0 +1,6 @@
+#5.34
+./configure --prefix=/cross-tools32 --disable-static
+
+make
+
+make install

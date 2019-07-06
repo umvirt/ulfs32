@@ -1,0 +1,2 @@
+chown -Rv 0:0 ${CLFS}/tools32
+chown -Rv 0:0 ${CLFS}/cross-tools32

@@ -1,0 +1,10 @@
+#1.4.18
+#m4-1.4.18-glibc-change-work-around.patch
+
+patch -p1 < ../m4-1.4.18-glibc-change-work-around.patch
+./configure --prefix=/cross-tools32
+make
+make install
+
+-------
+http://git.openembedded.org/openembedded-core/tree/meta/recipes-devtools/m4/m4/m4-1.4.18-glibc-change-work-around.patch

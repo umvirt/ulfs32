@@ -1,0 +1,13 @@
+cat > ${CLFS}/etc/fstab << "EOF"
+# Begin /etc/fstab
+
+# file system  mount-point  type   options          dump  fsck
+#                                                         order
+
+/dev/sda1     /            ext4  defaults         1     1
+#/dev/[yyy]     swap         swap   pri=1            0     0
+devpts         /dev/pts     devpts gid=5,mode=620   0     0
+shm            /dev/shm     tmpfs  defaults         0     0
+
+# End /etc/fstab
+EOF

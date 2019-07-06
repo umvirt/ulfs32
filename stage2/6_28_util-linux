@@ -1,0 +1,6 @@
+./configure --prefix=/tools32 \
+    --build=${CLFS_HOST} --host=${CLFS_TARGET} \
+    --disable-makeinstall-chown --disable-makeinstall-setuid
+
+make
+make install

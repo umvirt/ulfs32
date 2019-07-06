@@ -1,0 +1,19 @@
+mkdir -v build
+cd       build
+
+../configure --prefix=/usr       \
+             --enable-gold       \
+             --enable-ld=default \
+             --enable-plugins    \
+             --enable-shared     \
+             --disable-werror    \
+			 --enable-64-bit-bfd \
+             --with-system-zlib
+
+make tooldir=/usr
+make -k check
+make tooldir=/usr install
+
+
+#Added 64 bit support
+#http://archive.linuxfromscratch.org/mail-archives/lfs-support/2018-January/051725.html

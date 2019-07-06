@@ -1,0 +1,10 @@
+patch -Np1 -i ../bzip2-1.0.6-install_docs-1.patch
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+
+cp -v Makefile{,.orig}
+sed -e 's@^\(all:.*\) test@\1@g' Makefile.orig > Makefile
+
+make CC="${CC}" AR="${AR}" RANLIB="${RANLIB}"
+
+make PREFIX=/tools32 install

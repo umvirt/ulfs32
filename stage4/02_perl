@@ -1,0 +1,14 @@
+echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
+
+export BUILD_ZLIB=False
+export BUILD_BZIP2=0
+
+sed -i 's@/usr/include@/tools32/include@g' ext/Errno/Errno_pm.PL
+
+sh Configure -des -Dprefix=/tools32 -Dcc="gcc"
+
+make
+
+make install
+
+ln -sfv /tools32/bin/perl /usr/bin

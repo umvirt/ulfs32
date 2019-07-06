@@ -1,0 +1,20 @@
+cat > src/auto/config.cache << "EOF"
+vim_cv_getcwd_broken=no
+vim_cv_memmove_handles_overlap=yes
+vim_cv_stat_ignores_slash=no
+vim_cv_tgetent=zero 
+vim_cv_terminfo=yes
+vim_cv_toupper_broken=no
+vim_cv_tty_group=world
+EOF
+
+echo '#define SYS_VIMRC_FILE "/tools32/etc/vimrc"' >> src/feature.h
+
+./configure --build=${CLFS_HOST} --host=${CLFS_TARGET} \
+    --prefix=/tools32 --enable-gui=no --disable-gtktest --disable-xim \
+    --disable-gpm --without-x --disable-netbeans --with-tlib=ncursesw
+
+make
+make install
+
+# + terminfobugfix http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119160.html

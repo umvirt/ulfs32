@@ -1,0 +1,11 @@
+./configure --prefix=/tools32 --build=${CLFS_HOST} --host=${CLFS_TARGET} \
+    --disable-introspection --disable-gtk-doc-html \
+    --disable-gudev --disable-keymap --with-firmware-path=/tools32/lib/firmware \
+    --enable-libkmod
+
+make
+make install
+
+install -dv /tools32/lib/firmware
+echo "# dummy, so that network is once again on eth*" > \
+    /tools32/etc/udev/rules.d/80-net-name-slot.rules

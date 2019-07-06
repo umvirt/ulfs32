@@ -1,0 +1,5 @@
+./configure --prefix=/tools32 \
+    --build=${CLFS_HOST} --host=${CLFS_TARGET}
+
+make
+make install

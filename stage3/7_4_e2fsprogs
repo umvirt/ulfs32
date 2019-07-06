@@ -1,0 +1,10 @@
+mkdir -v build
+cd build
+
+../configure --prefix=/tools32 \
+    --enable-elf-shlibs --build=${CLFS_HOST} --host=${CLFS_TARGET} \
+    --disable-libblkid --disable-libuuid --disable-fsck \
+    --disable-uuidd
+
+make
+make install

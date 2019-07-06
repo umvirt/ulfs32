@@ -1,0 +1,11 @@
+mkdir -v build
+cd build
+
+../configure --prefix=/tools32 \
+    --build=${CLFS_HOST} --host=${CLFS_TARGET} --target=${CLFS_TARGET} \
+    --with-lib-path=/tools32/lib --disable-nls --enable-shared \
+    --disable-multilib --enable-64-bit-bfd 
+
+
+make
+make install

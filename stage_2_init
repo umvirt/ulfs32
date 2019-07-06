@@ -1,0 +1,33 @@
+cat > ~/.bash_profile << "EOF"
+exec env -i HOME=${HOME} TERM=${TERM} PS1='\u:\w\$ ' /bin/bash
+EOF
+
+cat > ~/.bashrc << "EOF"
+set +h
+umask 022
+CLFS=/mnt/ulfs32
+LC_ALL=POSIX
+PATH=/cross-tools32/bin:/bin:/usr/bin
+export CLFS LC_ALL PATH
+unset CFLAGS CXXFLAGS
+EOF
+
+cat >> ~/.bashrc << EOF
+export CLFS_HOST=$(echo ${MACHTYPE} | sed -e 's/-[^-]*/-cross/')
+export CLFS_TARGET="i686-pc-linux-gnu"
+EOF
+
+
+cat >> ~/.bashrc << EOF
+export CC="${CLFS_TARGET}-gcc"
+export CXX="${CLFS_TARGET}-g++"
+export AR="${CLFS_TARGET}-ar"
+export AS="${CLFS_TARGET}-as"
+export RANLIB="${CLFS_TARGET}-ranlib"
+export LD="${CLFS_TARGET}-ld"
+export STRIP="${CLFS_TARGET}-strip"
+EOF
+
+
+
+. ~/.bashrc

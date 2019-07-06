@@ -1,0 +1,9 @@
+LDFLAGS="-Wl,-rpath,/cross-tools32/lib" \
+    ./configure --prefix=/cross-tools32 --disable-static \
+    --with-gmp-prefix=/cross-tools32 --with-isl-prefix=/cross-tools32
+
+cp -v Makefile{,.orig}
+sed '/cmake/d' Makefile.orig > Makefile
+
+make
+make install

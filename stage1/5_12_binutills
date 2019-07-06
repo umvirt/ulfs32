@@ -1,0 +1,10 @@
+mkdir -v build
+cd build
+
+AR=ar AS=as ../configure \
+    --prefix=/cross-tools32 --host=${CLFS_HOST} --target=${CLFS_TARGET} \
+    --with-sysroot=${CLFS} --with-lib-path=/tools32/lib --disable-nls \
+    --disable-static --disable-multilib --disable-werror
+
+make
+make install

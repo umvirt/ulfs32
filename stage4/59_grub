@@ -1,0 +1,15 @@
+./configure --prefix=/usr          \
+            --sbindir=/sbin        \
+            --sysconfdir=/etc      \
+            --disable-efiemu       \
+            --disable-werror
+
+make
+
+make install
+
+
+#=====================
+#BUG: i386 compilation error with binutils-2.31.1
+#binutils with --enable-64-bit-bfd - solution
+#http://archive.linuxfromscratch.org/mail-archives/lfs-support/2018-January/051724.html

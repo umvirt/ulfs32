@@ -1,0 +1,5 @@
+#6.1.2
+./configure --prefix=/cross-tools32 --enable-cxx \
+    --disable-static
+make
+make install

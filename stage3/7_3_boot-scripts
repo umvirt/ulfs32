@@ -1,0 +1,1 @@
+make DESTDIR=/tools32 install-boot-scripts

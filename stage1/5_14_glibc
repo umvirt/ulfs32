@@ -1,0 +1,19 @@
+cp -v timezone/Makefile{,.orig}
+sed 's/\\$$(pwd)/`pwd`/' timezone/Makefile.orig > timezone/Makefile
+
+mkdir -v build
+cd build
+
+echo "libc_cv_ssp=no" > config.cache
+
+BUILD_CC="gcc" CC="${CLFS_TARGET}-gcc" \
+    AR="${CLFS_TARGET}-ar" RANLIB="${CLFS_TARGET}-ranlib" \
+    ../configure --prefix=/tools32 \
+    --host=${CLFS_TARGET} --build=${CLFS_HOST} \
+    --disable-profile --enable-kernel=2.6.32 \
+    --with-binutils=/cross-tools32/bin --with-headers=/tools32/include \
+    --enable-obsolete-rpc --cache-file=config.cache
+
+make
+
+make install

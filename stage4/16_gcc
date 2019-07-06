@@ -1,0 +1,24 @@
+rm -f /usr/lib/gcc
+
+mkdir -v build
+cd       build
+
+
+SED=sed                               \
+../configure --prefix=/usr            \
+             --enable-languages=c,c++ \
+             --disable-multilib       \
+             --disable-bootstrap      \
+             --disable-libmpx         \
+             --with-system-zlib
+
+make
+make install
+
+ln -sv ../usr/bin/cpp /lib
+ln -sv gcc /usr/bin/cc
+
+
+install -v -dm755 /usr/lib/bfd-plugins
+ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/8.2.0/liblto_plugin.so \
+        /usr/lib/bfd-plugins/

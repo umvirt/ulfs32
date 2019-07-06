@@ -1,0 +1,11 @@
+#6.1
+
+#patch -Np1 -i ../ncurses-5.9-branch_update-4.patch
+#patch -Np1 -i ../ncurses-5.9-bash_fix-1.patch
+./configure --prefix=/cross-tools32 \
+    --without-debug --without-shared
+
+make -C include
+make -C progs tic
+
+install -v -m755 progs/tic /cross-tools32/bin
