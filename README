@@ -42,17 +42,22 @@ Note: Another directory names used in order to allow multiple cross-compilations
 
 
 Stages
-======
+------
 
 1. Stage #1. "Cross-compilation environment" (/cross-tools32)
 
 Base: 5-th Chapter of CLFS book. Packages updated according LFS 8.3. 
 Input method: Copy & paste.
 
+Maintainer user init script: stage_1_init
+
 2. Stage #2. "Cross-compilation of compilation environment" (/tools32) 
 
 Base: 6-th Chapter of CLFS book. Packages updated according LFS 8.3. 
 Input method: Copy & paste.
+
+Maintainer user init script: stage_2_init
+
 
 4. Stage #3. "Boot preparation"
 
@@ -73,7 +78,7 @@ Input method:
 
 
 Used tricks
-===========
+-----------
 
 - File transfer via keyboard
 - Tab autocompletion
