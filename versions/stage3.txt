@@ -1,0 +1,8 @@
+boot-scripts-cross-lfs-3.0-20140710
+e2fsprogs-1.44.3
+eudev-3.2.5
+grub-2.02
+kmod-25
+linux-4.18.5
+shadow-4.6
+sysvinit-2.90
